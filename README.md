@@ -21,11 +21,11 @@
 
 ## Swagger企业实践：`springboot-swagger-demo`
 
-用于springboot+swagger接口文档企业实践文章的示例说明，此示例是一个`spring boot` + `swagger`的工程，里面包含了对swagger的注解使用，参数，参数化，接口认证，接口过滤等功能。
+基于springboot2+swagger2，结合在企业中的实践，对接口文档的编写进行详细说明。
 
 1. `hello-swagger-demo`
 
-- 示例功能： 基于springboot2+swagger2，结合在企业中的实践，对接口文档的编写进行详细说明，包括swagger介绍及文档生成说明，构建示例工程及配置描述使用注解添加文档内容说明，使用全局参数进行接口认证。
+- 示例功能： 包括swagger介绍及文档生成说明，构建示例工程及配置描述使用注解添加文档内容说明，使用全局参数进行接口认证。
 - 文章：[springboot+swagger接口文档企业实践（上）](https://mianshenglee.github.io/2019/11/13/springboot-swagger1.html)
 
 
