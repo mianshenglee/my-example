@@ -25,7 +25,7 @@
 
 1. `hello-swagger-demo`
 
-- 示例功能： 包括swagger介绍及文档生成说明，构建示例工程及配置描述使用注解添加文档内容说明，使用全局参数进行接口认证。
+- 示例功能： 包括swagger介绍及文档生成说明，构建示例工程及配置描述，使用注解添加文档内容说明，使用全局参数进行接口认证。
 - 文章：[springboot+swagger接口文档企业实践（上）](https://mianshenglee.github.io/2019/11/13/springboot-swagger1.html)
 
 
