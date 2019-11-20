@@ -1,0 +1,444 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API文档描述",
+    "version": "0.0.1-SNAPSHOT",
+    "title": "应用API说明文档",
+    "contact": {
+      "name": "mason"
+    },
+    "license": {}
+  },
+  "host": "localhost:8080",
+  "basePath": "/swaggerdemo",
+  "tags": [
+    {
+      "name": "用户管理接口",
+      "description": "User Controller"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "获取所有用户",
+        "description": "返回全部用户",
+        "operationId": "getUsersUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«List«User»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "添加多个用户",
+        "description": "使用JSON以数组形式添加多个用户",
+        "operationId": "addUsersUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "users",
+            "description": "用户JSON数组",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/users/user": {
+      "post": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "添加一个用户",
+        "description": "使用JSON形式添加一个用户",
+        "operationId": "addUserUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token，格式: Bearer &lttoken&gt",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "用户对象(JSON)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "更新某个用户",
+        "description": "使用JSON形式添加一个用户",
+        "operationId": "updateUserUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "用户对象(JSON)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "删除某个用户",
+        "description": "根据用户ID删除用户",
+        "operationId": "deleteUserUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«string»"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "用户管理接口"
+        ],
+        "summary": "根据ID获取单个用户信息",
+        "description": "根据ID返回用户对象",
+        "operationId": "getUserByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户列表",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseResult«User»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResponseResult«List«User»»": {
+      "type": "object",
+      "properties": {
+        "errCode": {
+          "type": "string",
+          "description": "错误信息代码"
+        },
+        "errMsg": {
+          "type": "string",
+          "description": "错误信息"
+        },
+        "errShowMsg": {
+          "type": "string",
+          "description": "错误显示信息"
+        },
+        "resultData": {
+          "type": "array",
+          "description": "返回数据",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "success": {
+          "type": "boolean",
+          "example": true,
+          "description": "返回状态"
+        }
+      }
+    },
+    "ResponseResult«User»": {
+      "type": "object",
+      "properties": {
+        "errCode": {
+          "type": "string",
+          "description": "错误信息代码"
+        },
+        "errMsg": {
+          "type": "string",
+          "description": "错误信息"
+        },
+        "errShowMsg": {
+          "type": "string",
+          "description": "错误显示信息"
+        },
+        "resultData": {
+          "description": "返回数据",
+          "$ref": "#/definitions/User"
+        },
+        "success": {
+          "type": "boolean",
+          "example": true,
+          "description": "返回状态"
+        }
+      }
+    },
+    "ResponseResult«string»": {
+      "type": "object",
+      "properties": {
+        "errCode": {
+          "type": "string",
+          "description": "错误信息代码"
+        },
+        "errMsg": {
+          "type": "string",
+          "description": "错误信息"
+        },
+        "errShowMsg": {
+          "type": "string",
+          "description": "错误显示信息"
+        },
+        "resultData": {
+          "type": "string",
+          "description": "返回数据"
+        },
+        "success": {
+          "type": "boolean",
+          "example": true,
+          "description": "返回状态"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "年龄"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1,
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "example": "张三",
+          "description": "姓名"
+        }
+      }
+    }
+  }
+}

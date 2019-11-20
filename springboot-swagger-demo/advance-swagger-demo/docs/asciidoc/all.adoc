@@ -1,0 +1,443 @@
+= 应用API说明文档
+
+
+[[_overview]]
+== Overview
+API文档描述
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 0.0.1-SNAPSHOT
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : mason
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8080
+__BasePath__ : /swaggerdemo
+
+
+=== Tags
+
+* 用户管理接口 : User Controller
+
+
+
+
+[[_paths]]
+== Resources
+
+[[_459ddcdf2261352d74a9df803f455247]]
+=== 用户管理接口
+User Controller
+
+
+[[_addusersusingpost]]
+==== 添加多个用户
+....
+POST /users
+....
+
+
+===== Description
+使用JSON以数组形式添加多个用户
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**users** +
+__required__|用户JSON数组|< <<_user,User>> > array
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_2fcc07109ac56c98de62a28511fb6955,ResponseResult«string»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+[[_getusersusingget]]
+==== 获取所有用户
+....
+GET /users
+....
+
+
+===== Description
+返回全部用户
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_c583432d101d81779faf4a7a6ae6d4dc,ResponseResult«List«User»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+[[_adduserusingpost]]
+==== 添加一个用户
+....
+POST /users/user
+....
+
+
+===== Description
+使用JSON形式添加一个用户
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Authorization** +
+__optional__|token，格式: Bearer &amp;lttoken&amp;gt|string
+|**Body**|**user** +
+__required__|用户对象(JSON)|<<_user,User>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_2fcc07109ac56c98de62a28511fb6955,ResponseResult«string»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+[[_updateuserusingput]]
+==== 更新某个用户
+....
+PUT /users/user
+....
+
+
+===== Description
+使用JSON形式添加一个用户
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**user** +
+__required__|用户对象(JSON)|<<_user,User>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_2fcc07109ac56c98de62a28511fb6955,ResponseResult«string»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+[[_deleteuserusingdelete]]
+==== 删除某个用户
+....
+DELETE /users/user
+....
+
+
+===== Description
+根据用户ID删除用户
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**userId** +
+__required__|用户ID|integer (int64)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_2fcc07109ac56c98de62a28511fb6955,ResponseResult«string»>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+[[_getuserbyidusingget]]
+==== 根据ID获取单个用户信息
+....
+GET /users/{userId}
+....
+
+
+===== Description
+根据ID返回用户对象
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__optional__|用户列表|integer (int64)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1a0d4ca65a630c3c812d7e1c11e0cdd8,ResponseResult«User»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+===== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_c583432d101d81779faf4a7a6ae6d4dc]]
+=== ResponseResult«List«User»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**errCode** +
+__optional__|错误信息代码|string
+|**errMsg** +
+__optional__|错误信息|string
+|**errShowMsg** +
+__optional__|错误显示信息|string
+|**resultData** +
+__optional__|返回数据|< <<_user,User>> > array
+|**success** +
+__optional__|返回状态 +
+**Example** : `true`|boolean
+|===
+
+
+[[_1a0d4ca65a630c3c812d7e1c11e0cdd8]]
+=== ResponseResult«User»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**errCode** +
+__optional__|错误信息代码|string
+|**errMsg** +
+__optional__|错误信息|string
+|**errShowMsg** +
+__optional__|错误显示信息|string
+|**resultData** +
+__optional__|返回数据|<<_user,User>>
+|**success** +
+__optional__|返回状态 +
+**Example** : `true`|boolean
+|===
+
+
+[[_2fcc07109ac56c98de62a28511fb6955]]
+=== ResponseResult«string»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**errCode** +
+__optional__|错误信息代码|string
+|**errMsg** +
+__optional__|错误信息|string
+|**errShowMsg** +
+__optional__|错误显示信息|string
+|**resultData** +
+__optional__|返回数据|string
+|**success** +
+__optional__|返回状态 +
+**Example** : `true`|boolean
+|===
+
+
+[[_user]]
+=== User
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**age** +
+__optional__|年龄 +
+**Example** : `10`|integer (int32)
+|**id** +
+__required__|id +
+**Example** : `1`|integer (int64)
+|**name** +
+__required__|姓名 +
+**Example** : `"张三"`|string
+|===
+
+
+
+
+[[_securityscheme]]
+== Security
+
+[[_authorization]]
+=== Authorization
+[%hardbreaks]
+__Type__ : apiKey
+__Name__ : Authorization
+__In__ : HEADER
+
+
+

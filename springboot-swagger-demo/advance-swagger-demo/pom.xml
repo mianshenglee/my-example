@@ -16,6 +16,18 @@
 		<java.version>1.8</java.version>
 		<springboot.version>2.2.0.RELEASE</springboot.version>
 		<swagger.version>2.7.0</swagger.version>
+
+		<!-- 文档输出插件版本 -->
+		<swagger.plugin.version>3.1.8</swagger.plugin.version>
+        <swagger2markup.version>1.3.1</swagger2markup.version>
+        <swagger2markup.plugin.version>1.3.3</swagger2markup.plugin.version>
+		<asciidoctor.plugin.version>1.5.7</asciidoctor.plugin.version>
+		<!-- 文档输出路径 -->
+		<docs.path>${basedir}/docs</docs.path>
+		<docs.asciidoc.path>${docs.path}/asciidoc</docs.asciidoc.path>
+		<docs.html.path>${docs.path}/html</docs.html.path>
+		<docs.pdf.path>${docs.path}/pdf</docs.pdf.path>
+		<docs.swagger.json.path>${docs.path}/swagger/api-docs.json</docs.swagger.json.path>
 	</properties>
 
 	<dependencies>
@@ -32,12 +44,26 @@
 			<version>${springboot.version}</version>
 		</dependency>
 
-		<!-- swagger接口 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<version>${springboot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- swagger接口文档 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
+		<!-- swagger接口显示UI -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
@@ -57,25 +83,12 @@
 			<optional>true</optional>
 			<version>1.18.10</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<version>${springboot.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- swagger文档输出 -->
-		<dependency>
-			<groupId>io.github.swagger2markup</groupId>
-			<artifactId>swagger2markup</artifactId>
-			<version>1.3.1</version>
-		</dependency>
+		<!-- swagger文档离线输出 -->
+		<!--<dependency>-->
+			<!--<groupId>io.github.swagger2markup</groupId>-->
+			<!--<artifactId>swagger2markup</artifactId>-->
+			<!--<version>${swagger2markup.version}</version>-->
+		<!--</dependency>-->
 	</dependencies>
 		
 	<build>
@@ -83,6 +96,91 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- 1.swagger.json文件转asciidoc文件-->
+			<plugin>
+				<groupId>io.github.swagger2markup</groupId>
+				<artifactId>swagger2markup-maven-plugin</artifactId>
+				<version>${swagger2markup.plugin.version}</version>
+				<configuration>
+					<!-- 访问url -->
+					<!--<swaggerInput>http://localhost:8080/swaggerdemo/v2/api-docs?group=default</swaggerInput>-->
+					<!-- 访问json文件-->
+					<swaggerInput>${docs.swagger.json.path}</swaggerInput>
+					<!-- 生成多个文档输出路径 -->
+					<!--<outputDir>${docs.asciidoc.path}</outputDir>-->
+					<!-- 生成单个文档输出路径 -->
+					<outputFile>${docs.asciidoc.path}/all</outputFile>
+					<config>
+						<swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy>
+						<!-- 选择：ASCIIDOC/MARKDOWN/CONFLUENCE_MARKUP-->
+						<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+					</config>
+				</configuration>
+			</plugin>
+			<!-- 2.asciidoc文件转html/pdf文件-->
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>${asciidoctor.plugin.version}</version>
+				<!-- 转换pdf使用的依赖 -->
+				<dependencies>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-pdf</artifactId>
+						<version>1.5.0-alpha.16</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jruby</groupId>
+						<artifactId>jruby-complete</artifactId>
+						<version>9.2.8.0</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<sourceDirectory>${docs.asciidoc.path}</sourceDirectory>
+					<doctype>book</doctype>
+					<sourceHighlighter>coderay</sourceHighlighter>
+					<headerFooter>true</headerFooter>
+					<attributes>
+						<!-- 菜单栏在左边 -->
+						<toc>left</toc>
+						<!-- 三级目录 -->
+						<toclevels>3</toclevels>
+						<!-- 数字序号 -->
+						<sectnums>true</sectnums>
+					</attributes>
+				</configuration>
+				<!-- 生成html和pdf两种格式 -->
+				<executions>
+					<execution>
+						<id>output-html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${docs.html.path}</outputDirectory>
+							<backend>html</backend>
+						</configuration>
+					</execution>
+					<execution>
+						<id>output-pdf</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${docs.pdf.path}</outputDirectory>
+							<backend>pdf</backend>
+							<!-- 处理中文字符问题 -->
+							<attributes>
+								<pdf-fontsdir>${docs.pdf.path}/fonts</pdf-fontsdir>
+								<pdf-stylesdir>${docs.pdf.path}/themes</pdf-stylesdir>
+								<pdf-style>cn</pdf-style>
+							</attributes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
