@@ -84,11 +84,11 @@
 			<version>1.18.10</version>
 		</dependency>
 		<!-- swagger文档离线输出 -->
-		<!--<dependency>-->
-			<!--<groupId>io.github.swagger2markup</groupId>-->
-			<!--<artifactId>swagger2markup</artifactId>-->
-			<!--<version>${swagger2markup.version}</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>io.github.swagger2markup</groupId>
+			<artifactId>swagger2markup</artifactId>
+			<version>${swagger2markup.version}</version>
+		</dependency>
 	</dependencies>
 		
 	<build>

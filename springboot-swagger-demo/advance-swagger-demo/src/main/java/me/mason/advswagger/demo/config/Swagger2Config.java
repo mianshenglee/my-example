@@ -55,6 +55,8 @@ public class Swagger2Config {
 				//是否启用
 				.enable(swaggerInfo.getEnable());
 		ApiSelectorBuilder builder = docket.select();
+		//
+		// 指定需要过滤的版本号
 		builder = builder.apis(Predicates.and(apisFilter(false,true
 				,new String[]{ApiVersionConstant.VERVION_100})));
 		//接口路径过滤

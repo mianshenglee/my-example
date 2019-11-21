@@ -31,7 +31,7 @@
 2. `advance-sagger-demo`
 
 - 示例功能：包含对接口进行动态过滤，结合easymock进行数据模拟，对接口文档进行离线文档输出等功能。
-- 文章：springboot+swagger接口文档企业实践（下）
+- 文章：[springboot+swagger接口文档企业实践（下）](https://mianshenglee.github.io/2019/11/21/springboot-swagger2.html)
 
 
 
