@@ -87,7 +87,7 @@
     <!-- 继承上级root日志级别，默认向上级传递日志内容，本身不输出 -->
     <!--<logger name="me.mason.demo.simplelogback.service"/>-->
     <!-- 日志级别，不向上级传递日志内容，日志按appender-ref输出 -->
-    <logger name="me.mason.demo.simplelogback.service.UserService" level="WARN" additivity="false">
+    <logger name="me.mason.demo.simplelogback.service.UserService" level="WARN" additivity="true">
         <appender-ref ref="STDOUT"/>
     </logger>
     <!-- 日志输出 -->
