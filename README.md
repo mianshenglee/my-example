@@ -33,6 +33,33 @@
 - 示例功能：包含对接口进行动态过滤，结合easymock进行数据模拟，对接口文档进行离线文档输出等功能。
 - 文章：[springboot+swagger接口文档企业实践（下）](https://mianshenglee.github.io/2019/11/21/springboot-swagger2.html)
 
+## logback企业实践：`springboot-logback-demo`
+
+基于springboot+logback，对日志输出框架的使用示例，结合在企业中的实践进行详细说明。
+
+1. `logback-simple-demo`
+
+- 示例功能： 使用springboot+logback构建示例工程及配置描述，对logback配置文件的详述及使用，实现按日志级别输出到文件功能。
+- 文章：[springboot+logback日志输出企业实践（上）](https://mianshenglee.github.io/2019/11/28/logback1.html)
+
+2. `logback-advance-demo`
+
+- 示例功能：正在编写......
+- 文章：正在编写......
+
+# 如何找到我的更多文章
+
+- [我的Blog](https://mianshenglee.github.io)：`https://mianshenglee.github.io/`
+
+- 我的公众号：
+
+![mason](https://gitee.com/mianshenglee/datastorage/raw/master/md-photo/myphoto/wx/wx-public.jpg)
+
+- 各大博客平台（CSDN，掘金，开源中国，博客园，语雀，segmentfault，开发者头条），搜索**Mason技术记录**也可以找到
+
+
+
+
 
 
 
