@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration scan="true" scanPeriod="1 seconds">
-    <!--日志文档前缀，即应用名称 -->
+    <!--日志文件前缀，即应用名称 -->
     <property name="logfile.prefix" value="logback-demo"/>
     <!--日志路径，可写相对路径，也可写绝对路径 -->
     <property name="log.path" value="logs"/>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5level [%15thread] [%40logger{40}] [%10method,%line] : %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5level [%15thread] %40.40logger{40} [%10method,%line] : %msg%n"/>
 
     <!-- 控制台输出日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -84,6 +84,12 @@
         </layout>
     </appender>
 
+    <!-- 继承上级root日志级别，默认向上级传递日志内容，本身不输出 -->
+    <!--<logger name="me.mason.demo.simplelogback.service"/>-->
+    <!-- 日志级别，不向上级传递日志内容，日志按appender-ref输出 -->
+    <logger name="me.mason.demo.simplelogback.service.UserService" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
     <!-- 日志输出 -->
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>

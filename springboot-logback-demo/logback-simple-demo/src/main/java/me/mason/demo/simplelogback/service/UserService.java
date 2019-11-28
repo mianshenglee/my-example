@@ -27,6 +27,7 @@ public class UserService {
      */
     public User getUserById(long id) {
         log.debug("get user by id:{}", id);
+        //测试输出error日志
         if (id == 10L) {
             log.error("error id:{}", id);
             return null;
@@ -53,6 +54,12 @@ public class UserService {
         }
 
         log.info("return users:{}", users);
+        //测试输出
+        log.trace("------log trace");
+        log.debug("------log debug");
+        log.info("------log info");
+        log.warn("------log warn");
+        log.error("------log error");
         return users;
     }
 
