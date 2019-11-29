@@ -11,5 +11,5 @@
 
 2. `logback-advance-demo`
 
-- 示例功能：正在编写......
-- 文章：正在编写......
+- 示例功能：对 logback 的进阶使用进行描述，主要包括日志异步输出，多环境日志配置以及使用MDC进行分布式系统请求追踪。
+- 文章：[springboot+logback日志输出企业实践（下）]( https://mianshenglee.github.io/2019/11/29/logback2.html )

@@ -44,14 +44,14 @@
 
 2. `logback-advance-demo`
 
-- 示例功能：正在编写......
-- 文章：正在编写......
+- 示例功能：对 logback 的进阶使用进行描述，主要包括日志异步输出，多环境日志配置以及使用MDC进行分布式系统请求追踪。
+- 文章：[springboot+logback日志输出企业实践（下）]( https://mianshenglee.github.io/2019/11/29/logback2.html )
 
 # 如何找到我的更多文章
 
 - [我的Blog](https://mianshenglee.github.io)：`https://mianshenglee.github.io/`
 
-- 我的公众号：
+- 我的公众号（搜索`Mason技术记录`）：
 
 ![mason](https://gitee.com/mianshenglee/datastorage/raw/master/md-photo/myphoto/wx/wx-public.jpg)
 

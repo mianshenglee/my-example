@@ -22,27 +22,6 @@ public class RequestIdTraceInterceptor implements HandlerInterceptor {
 
     public static final String REQUEST_ID_KEY = "request-id";
 
-    /**
-     * 根据请求参数或请求头判断是否有“x-request-id”，有则使用，无则创建
-     *
-     * @param request
-     * @return 返回x-request-id的唯一标识
-     */
-    public static String getRequestId(HttpServletRequest request) {
-        String requestId;
-        String parameterRequestId = request.getParameter(REQUEST_ID_KEY);
-        String headerRequestId = request.getHeader(REQUEST_ID_KEY);
-
-        if (parameterRequestId == null && headerRequestId == null) {
-            log.debug("no x-request-id in request parameter or header");
-            requestId = IdUtil.simpleUUID();
-        } else {
-            requestId = parameterRequestId != null ? parameterRequestId : headerRequestId;
-        }
-
-        return requestId;
-    }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         MDC.put(REQUEST_ID_KEY, getRequestId(request));
@@ -55,5 +34,26 @@ public class RequestIdTraceInterceptor implements HandlerInterceptor {
         response.addHeader(REQUEST_ID_KEY, MDC.get(REQUEST_ID_KEY));
         //请求完成，从MDC中移除requestId
         MDC.remove(REQUEST_ID_KEY);
+    }
+
+    /**
+     * 根据请求参数或请求头判断是否有“request-id”，有则使用，无则创建
+     *
+     * @param request
+     * @return 返回x-request-id的唯一标识
+     */
+    public static String getRequestId(HttpServletRequest request) {
+        String requestId;
+        String parameterRequestId = request.getParameter(REQUEST_ID_KEY);
+        String headerRequestId = request.getHeader(REQUEST_ID_KEY);
+
+        if (parameterRequestId == null && headerRequestId == null) {
+            log.debug("no request-id in request parameter or header");
+            requestId = IdUtil.simpleUUID();
+        } else {
+            requestId = parameterRequestId != null ? parameterRequestId : headerRequestId;
+        }
+
+        return requestId;
     }
 }
