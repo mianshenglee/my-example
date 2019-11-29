@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration scan="true" scanPeriod="1 seconds">
+    <!-- 输出logback的本身状态数据 -->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+    <!--日志文件名前缀，即应用名称 -->
+    <property name="logfile.prefix" value="logback-demo"/>
+    <!--日志路径，可写相对路径，也可写绝对路径 -->
+    <property name="log.path" value="logs"/>
+    <!-- 日志输出格式 -->
+    <property name="log.pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5level [%10thread] [%X{request-id}] %40.40logger{40} [%10method,%line] : %msg%n"/>
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${log.pattern}</pattern>
+        </layout>
+    </appender>
+    <!-- 文件输出日志， 滚动（时间/文件大小）输出策略 -->
+    <appender name="DEBUGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，只记录debug级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <!-- 日志文件路径及文件名 -->
+        <File>${log.path}/${logfile.prefix}-debug.log</File>
+        <!-- 日志记录器的滚动策略，按日期记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志输出格式 -->
+            <FileNamePattern>${log.path}/${logfile.prefix}-debug.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- 日志保留天数 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+    <appender name="INFOFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <File>${log.path}/${logfile.prefix}-info.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.path}/${logfile.prefix}-info.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <maxHistory>30</maxHistory> <!-- keep 90 days -->
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+    <appender name="WARNFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <File>${log.path}/${logfile.prefix}-warn.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.path}/${logfile.prefix}-warn.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <maxHistory>30</maxHistory> <!-- keep 90 days -->
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+    <appender name="ERRORFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <File>${log.path}/${logfile.prefix}-error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.path}/${logfile.prefix}-error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNCDEBUG" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 默认如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志，若要保留全部日志，设置为0 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>1024</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="DEBUGFILE"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+    <appender name="ASYNCINFO" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="INFOFILE"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+    <appender name="ASYNCWARN" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="WARNFILE"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+    <appender name="ASYNCERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="ERRORFILE"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <!-- 开发环境:debug级别-->
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNCDEBUG" />
+            <appender-ref ref="ASYNCINFO" />
+            <appender-ref ref="ASYNCWARN" />
+            <appender-ref ref="ASYNCERROR" />
+        </root>
+    </springProfile>
+
+    <!-- 生产环境:error级别-->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNCDEBUG" />
+            <appender-ref ref="ASYNCINFO" />
+            <appender-ref ref="ASYNCWARN" />
+            <appender-ref ref="ASYNCERROR" />
+        </root>
+    </springProfile>
+
+</configuration>
