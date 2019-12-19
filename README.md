@@ -1,10 +1,10 @@
-# 说明
+# 1. 说明
 
 在写文章过程中，经常会使用一些示例工程来辅助说明，本仓库用于存放一些示例工程，以便于读者可以参考。
 
-# 示例说明
+# 2. 示例说明
 
-## java应用监测：`java-monitor-example`
+## 2.1 java应用监测：`java-monitor-example`
 
 用于[java监测技术文章](https://mianshenglee.github.io/)的示例说明，此示例是一个`spring boot`工程，里面包含简单的`controller`和`service`类，`OOM`的接口等功能。
 
@@ -19,7 +19,7 @@
 - [java应用监测(7)-在线动态诊断神器BTrace]( https://mianshenglee.github.io/2019/08/30/java-monitor-7.html )
 - [java应用监测(8)-阿里诊断工具arthas]( https://mianshenglee.github.io/2019/08/31/java-monitor-8.html )
 
-## Swagger企业实践：`springboot-swagger-demo`
+## 2.2 Swagger企业实践：`springboot-swagger-demo`
 
 基于springboot2+swagger2，结合在企业中的实践，对接口文档的编写进行详细说明。
 
@@ -33,7 +33,7 @@
 - 示例功能：包含对接口进行动态过滤，结合easymock进行数据模拟，对接口文档进行离线文档输出等功能。
 - 文章：[springboot+swagger接口文档企业实践（下）](https://mianshenglee.github.io/2019/11/21/springboot-swagger2.html)
 
-## logback企业实践：`springboot-logback-demo`
+## 2.3 logback企业实践：`springboot-logback-demo`
 
 基于springboot+logback，对日志输出框架的使用示例，结合在企业中的实践进行详细说明。
 
@@ -46,6 +46,16 @@
 
 - 示例功能：对 logback 的进阶使用进行描述，主要包括日志异步输出，多环境日志配置以及使用MDC进行分布式系统请求追踪。
 - 文章：[springboot+logback日志输出企业实践（下）]( https://mianshenglee.github.io/2019/11/29/logback2.html )
+
+
+
+## 2.4 java动态代理：`dynamic-proxy-demo`
+
+对java的动态代理技术的使用示例，示例中包含了java反射、静态代理、动态代理、Spring AOP的使用实例。配套以下文章进行学习：
+
+- 文章：
+
+
 
 # 如何找到我的更多文章
 
