@@ -1,9 +1,8 @@
 package me.mason.demo.proxy.springaop.aop;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
  * @author: mason
  * @since: 2019/12/19
  **/
+@Slf4j
 @Aspect
 @Component
 public class LogAopAspect {
@@ -24,13 +24,31 @@ public class LogAopAspect {
     }
 
     @Before("allServiceMethodPointCut()")
-    public void before(){
-        System.out.println(" spring aop log begin ");
+    public void before() {
+        log.info(" spring aop before log begin ");
     }
 
     @AfterReturning("allServiceMethodPointCut()")
-    public void after(){
-        System.out.println(" spring aop log end ");
+    public void after() {
+        log.info(" spring aop before log end ");
+    }
+
+    /**
+     * 环绕通知
+     *
+     * @param proceedingJoinPoint 连接点
+     * @return
+     * @throws Throwable
+     */
+    @Around("allServiceMethodPointCut()")
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        log.info(" spring aop around log begin ");
+        try {
+            //若方法有返回值，需要返回调用结果
+            return proceedingJoinPoint.proceed();
+        } finally {
+            log.info(" spring aop around log end ");
+        }
     }
 
 }
