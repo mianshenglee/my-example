@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * @since: 2020/1/8
  **/
 @Configuration
-@PropertySource("classpath:config/application-jdbc.properties")
+@PropertySource("classpath:config/jdbc.properties")
 public class DatasourceConfig {
     @Bean("master")
     @ConfigurationProperties(prefix = "spring.datasource.master")
