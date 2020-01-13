@@ -8,3 +8,8 @@
 
 - 示例功能： 使用多套数据源的策略，实现一主一从的数据库逻辑。
 - 文章：[搞定SpringBoot多数据源(1)：多套源策略](https://mianshenglee.github.io/2020/01/13/multi-datasource-1.html)
+
+2. `dynamic-datasource`
+
+- 示例功能： 使用动态数据源策略进行数据源切换，也可使用 AOP 方式进行数据源切换，实现一主一从的数据库逻辑。
+- 文章：[搞定SpringBoot多数据源(2)：动态数据源](https://mianshenglee.github.io/2020/01/13/multi-datasource-2.html)
