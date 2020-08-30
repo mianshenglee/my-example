@@ -173,21 +173,13 @@ if __name__ == '__main__':
     excel_path = "E:/pythontest/tableinfo.xlsx"
 
     host = "localhost"
-    port = 3310
+    port = 3306
     user = "root"
-    password = "111111"
-    db_name = "zzdx_metabase"
+    password = "123456"
+    db_name = "my_test"
     charset = 'utf8'
 
-    # host = "192.168.6.23"
-    # port = 3306
-    # user = "root"
-    # password = "123456"
-    # db_name = "4.0-test"
-    # charset = 'utf8'
-
-    col_names_to_skip = ["id", "create_by", "create_time", "update_by", "update_time"
-        , "created_by", "created_time", "updated_by", "updated_time", "revision", "sys_create_time"
+    col_names_to_skip = ["id" "sys_create_time"
         , "sys_create_user", "sys_update_time", "sys_update_user", "record_version"]
 
     dbInfoGenerator = DbInfoGenerator(host, port, user, password, db_name, charset)
