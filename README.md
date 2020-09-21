@@ -75,7 +75,7 @@
 - 示例功能： 根据参数动态添加数据源以及切换数据源，解决不确定数据源的问题。
 - 文章：[搞定SpringBoot多数据源(3)：参数化变更源](https://mianshenglee.github.io/2020/01/13/multi-datasource-3.html)
 
-## 2.6 使用python自动化生成数据库说明文档
+## 2.6 使用python自动化生成数据库说明文档：` python/tool-gen-db-doc `
 
 通过使用 SQL 读取数据库表及字段元信息，然后输出到 excel 文档的思路，以 python 的实现方式完成自动生成文档功能
 
