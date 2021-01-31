@@ -1,9 +1,11 @@
 package me.mason.demo.parametricds.config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import me.mason.demo.parametricds.context.DynamicDataSourceContextHolder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -41,5 +43,18 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
         return DynamicDataSourceContextHolder.getContextKey();
+    }
+
+    public  void del(String key){
+        DataSource dataSource = (DataSource) backupTargetDataSources.get(key);
+        try {
+            dataSource.getConnection().close();
+            ((HikariDataSource)dataSource).close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        backupTargetDataSources.remove(key);
+        super.setTargetDataSources(this.backupTargetDataSources);
+        super.afterPropertiesSet();
     }
 }

@@ -1,6 +1,8 @@
 package me.mason.demo.parametricds.proxy;
 
+import me.mason.demo.parametricds.config.DynamicDataSource;
 import me.mason.demo.parametricds.context.DynamicDataSourceContextHolder;
+import me.mason.demo.parametricds.context.SpringContextHolder;
 import me.mason.demo.parametricds.util.DataSourceUtil;
 import me.mason.demo.parametricds.vo.DbInfo;
 
@@ -37,12 +39,14 @@ public class JdkParamDsMethodProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println(method.getName());
+        System.out.println("动态代理:"+method.getName());
         //切换数据源
         DataSourceUtil.addDataSourceToDynamic(dataSourceKey, dbInfo);
         DynamicDataSourceContextHolder.setContextKey(dataSourceKey);
         //调用方法
         Object result = method.invoke(targetObject, args);
+        DynamicDataSource dynamicDataSource = SpringContextHolder.getContext().getBean(DynamicDataSource.class);
+        dynamicDataSource.del(dataSourceKey);
         DynamicDataSourceContextHolder.removeContextKey();
 
         return result;
