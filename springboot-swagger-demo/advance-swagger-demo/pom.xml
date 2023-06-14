@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-core</artifactId>
-			<version>4.5.7</version>
+			<version>5.8.19</version>
 		</dependency>
 		<!-- 工具包：lombok -->
 		<dependency>
